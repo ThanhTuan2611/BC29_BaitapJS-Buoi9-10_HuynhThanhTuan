@@ -33,7 +33,7 @@ function layThongTinNV() {
 
   // Check validation
   // Tài Khoản
-  isValid &= validation.kiemTraRong(_taiKhoan, "tbTKNV", "(*) Vui lòng không bỏ trống") && validation.kiemTraDoDaiKyTu(_taiKhoan, "tbTKNV", 4, 6, "(*) Vui lòng nhập từ 4-6 ký tự");
+  isValid &= validation.kiemTraRong(_taiKhoan, "tbTKNV", "(*) Vui lòng không bỏ trống") && validation.kiemTraDoDaiKyTu(_taiKhoan, "tbTKNV", 4, 6, "(*) Vui lòng nhập từ 4-6 ký tự") //&& validation.kiemTraKySo(_taiKhoan, "tbTKNV", "(*) Vui lòng nhập ký số");
 
   // Tên Nhân Viên
   isValid &= validation.kiemTraRong(_tenNV, "tbTen", "(*) Vui lòng không bỏ trống") && validation.kiemTraChuoiKiTu(_tenNV, "tbTen", "(*) Vui lòng không nhập chữ số");
@@ -91,7 +91,6 @@ getEle("btnThemNV").onclick = function () {
     taoBang(danhSachNV.arr);
     setLocalStorage();
   }
-
 };
 
 
