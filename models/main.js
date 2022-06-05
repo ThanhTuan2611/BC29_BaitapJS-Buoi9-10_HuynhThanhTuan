@@ -14,7 +14,7 @@ function getEle(id) {
 
 
 // Hàm lấy thông tin nhân viên
-function layThongTinNV() {
+function layThongTinNV(isEdit) {
   // DOM tới các thẻ input để lấy giá trị
   var _taiKhoan = getEle("tknv").value;
   var _tenNV = getEle("name").value;
@@ -33,7 +33,12 @@ function layThongTinNV() {
 
   // Check validation
   // Tài Khoản
-  isValid &= validation.kiemTraRong(_taiKhoan, "tbTKNV", "(*) Vui lòng không bỏ trống") && validation.kiemTraDoDaiKyTu(_taiKhoan, "tbTKNV", 4, 6, "(*) Vui lòng nhập từ 4-6 ký số") && validation.kiemTraKySo(_taiKhoan, "tbTKNV", "(*) Vui lòng nhập ký số") && validation.kiemTraTaiKhoanDaTonTai(_taiKhoan, "tbTKNV", "(*) Mã nhân viên này đã tồn tại vui lòng nhập mã khác", danhSachNV.arr);
+  isValid &= validation.kiemTraRong(_taiKhoan, "tbTKNV", "(*) Vui lòng không bỏ trống") && validation.kiemTraDoDaiKyTu(_taiKhoan, "tbTKNV", 4, 6, "(*) Vui lòng nhập từ 4-6 ký số") && validation.kiemTraKySo(_taiKhoan, "tbTKNV", "(*) Vui lòng nhập ký số");
+  if (!isEdit) {
+    isValid &= validation.kiemTraTaiKhoanDaTonTai(
+      _taiKhoan, 'tbTKNV', '(*) Mã nhân viên đã tồn tại vui lòng nhập mã khác', danhSachNV.arr
+    )
+  }
 
   // Tên Nhân Viên
   isValid &= validation.kiemTraRong(_tenNV, "tbTen", "(*) Vui lòng không bỏ trống") && validation.kiemTraChuoiKiTu(_tenNV, "tbTen", "(*) Vui lòng không nhập chữ số");
@@ -149,7 +154,7 @@ function suaNV(id) {
 
 // Cập nhật nhân viên
 getEle("btnCapNhat").onclick = function () {
-  var nhanVien = layThongTinNV();
+  var nhanVien = layThongTinNV(true);
   danhSachNV.capNhatNV(nhanVien);
   taoBang(danhSachNV.arr);
   setLocalStorage();
